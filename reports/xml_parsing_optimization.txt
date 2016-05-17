@@ -1,0 +1,134 @@
+All statistics of each run are at the end of the file.
+
+The initial implementation was REALLY slow. It took approximately 16 minutes to complete.
+
+After looking at the provided example, we decided to group insertions into batches and created caches to hold inserts that were not executed yet to prevent duplicates in the database. This version took around 5 minutes.
+
+We then focused in on each table and found that the genres table did not have that many unique entries, but each movie had atleast one genre which means many queries were being made to check for duplicates so we decided to cache genres. We also noticed that while parsing casts.xml, the same actors were not being found over and over again. We decided to cache actors that were not found so that they wouldn't be checked against the database multiple times. This version did not show a great improvement (315 seconds vs 320 seconds in the last step).
+
+We then did some research and found that turning off autocommit would improve the speed of our parser as every statement was being commited one at a time. At first we autocommited only after batch inserts. We later found that we could safely commit when the transaction had less than about 100,000 statements, which is true in our case, so we commited at the end of the document. This showed a significant improvement with a run time of 181 seconds.
+
+##############################################
+NO BATCH/CACHE
+
+----------------------------------
+MOVIES SAX HANDLER
+Process took 395s.
+Total items processed: 12115
+# of successes: 12055
+# of failures: 60
+# of SQL statements executed: 55928
+----------------------------------
+ACTORS SAX HANDLER
+Process took 79s.
+Total items processed: 6863
+# of successes: 6802
+# of failures: 61
+# of SQL statements executed: 13610
+----------------------------------
+CASTS SAX HANDLER
+Process took 485s.
+Total items processed: 48938
+# of successes: 30193
+# of failures: 18745
+# of SQL statements executed: 108857
+----------------------------------
+Total runtime: 961s.
+
+##############################################
+BATCH + CACHING TO PREVENT DUPLICATES
+
+----------------------------------
+MOVIES SAX HANDLER
+Process took 148s.
+Total items processed: 12115
+# of successes: 12055
+# of failures: 60
+# of SQL statements executed: 34065
+Batch size: 5000
+Cache hits: 1
+----------------------------------
+ACTORS SAX HANDLER
+Process took 2s.
+Total items processed: 6863
+# of successes: 6802
+# of failures: 61
+# of SQL statements executed: 6804
+Batch size: 5000
+Cache hits: 6
+----------------------------------
+CASTS SAX HANDLER
+Process took 169s.
+Total items processed: 48938
+# of successes: 29586
+# of failures: 19352
+# of SQL statements executed: 107758
+Batch size: 5000
+Cache hits: 249
+----------------------------------
+Total runtime: 320s.
+
+##############################################
+CACHING (GENRE, STAR NOT FOUND) + BATCH
+
+----------------------------------
+MOVIES SAX HANDLER
+Process took 150s.
+Total items processed: 12115
+# of successes: 12055
+# of failures: 60
+# of SQL statements executed: 24392
+Batch size: 5000
+Cache hits: 9674
+----------------------------------
+ACTORS SAX HANDLER
+Process took 3s.
+Total items processed: 6863
+# of successes: 6802
+# of failures: 61
+# of SQL statements executed: 6804
+Batch size: 5000
+Cache hits: 6
+----------------------------------
+CASTS SAX HANDLER
+Process took 162s.
+Total items processed: 48938
+# of successes: 29586
+# of failures: 19352
+# of SQL statements executed: 103156
+Batch size: 5000
+Cache hits: 4851
+----------------------------------
+Total runtime: 315s.
+
+##############################################
+CACHING (GENRE, STAR NOT FOUND) + BATCH + auto commit off for all
+----------------------------------
+MOVIES SAX HANDLER
+Process took 20s.
+Total items processed: 12115
+# of successes: 12055
+# of failures: 60
+# of SQL statements executed: 24392
+Batch size: 5000
+Cache hits: 9674
+----------------------------------
+ACTORS SAX HANDLER
+Process took 2s.
+Total items processed: 6863
+# of successes: 6802
+# of failures: 61
+# of SQL statements executed: 6804
+Batch size: 5000
+Cache hits: 6
+----------------------------------
+CASTS SAX HANDLER
+Process took 157s.
+Total items processed: 48938
+# of successes: 29586
+# of failures: 19352
+# of SQL statements executed: 101324
+Batch size: 5000
+Cache hits: 6683
+----------------------------------
+Total runtime: 181s.

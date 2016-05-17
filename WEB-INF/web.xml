@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application
+2.3//EN" "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:emaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  version="2.5">
+
+  <!-- Web Application Description -->
+  <display-name>Fabflix</display-name>
+  <description>
+    Web-based interfaces to allow customers to browse/search for movie information,
+    add interesting movies to their shopping cart, and check out.
+  </description>
+
+  <!-- DB credentials -->
+  <context-param>
+    <param-name>db_user</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db_password</param-name>
+    <param-value>home123</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db_url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/moviedb</param-value>
+  </context-param>
+
+  <!-- Index routing  -->
+  <welcome-file-list>
+	<welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.SearchServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BrowseServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.BrowseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MoviesServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.MoviesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MovieServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.MovieServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StarServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.StarServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.CheckoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CartServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.CartServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.MainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DashboardServlet</servlet-name>
+    <servlet-class>edu.fabflix.Controller.DashboardServlet</servlet-class>
+  </servlet>
+
+  <!-- Servlets (Reports) -->
+  <servlet>
+    <servlet-name>LikePredicate</servlet-name>
+    <servlet-class>edu.fabflix.LikePredicate</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ReadMe</servlet-name>
+    <servlet-class>edu.fabflix.ReadMe</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>XMLParsing</servlet-name>
+    <servlet-class>edu.fabflix.XMLParsing</servlet-class>
+  </servlet>
+
+  <!-- Servlet Mappings -->
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BrowseServlet</servlet-name>
+    <url-pattern>/browse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MoviesServlet</servlet-name>
+    <url-pattern>/movies</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MovieServlet</servlet-name>
+    <url-pattern>/_dashboard/movie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StarServlet</servlet-name>
+    <url-pattern>/star</url-pattern>
+    <url-pattern>/_dashboard/star</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CartServlet</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DashboardServlet</servlet-name>
+    <url-pattern>/_dashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MobileLoginServlet</servlet-name>
+    <url-pattern>/api/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MobileMovieSearchServlet</servlet-name>
+    <url-pattern>/api/movie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MobileStarSearchServlet</servlet-name>
+    <url-pattern>/api/star</url-pattern>
+  </servlet-mapping>
+
+  <!-- Servlet Mappings (Reports) -->
+  <servlet-mapping>
+    <servlet-name>LikePredicate</servlet-name>
+    <url-pattern>/reports/like-predicate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReadMe</servlet-name>
+    <url-pattern>/reports/readme</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>XMLParsing</servlet-name>
+    <url-pattern>/reports/xml_parsing_optimization</url-pattern>
+  </servlet-mapping>
+
+  <!-- Filters -->
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>edu.fabflix.Filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>EmployeeAuthenticationFilter</filter-name>
+    <filter-class>edu.fabflix.Filter.EmployeeAuthenticationFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>ViewFilter</filter-name>
+    <filter-class>edu.fabflix.Filter.ViewFilter</filter-class>
+  </filter>
+
+  <!-- Filter Mappings -->
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/main</url-pattern>
+    <url-pattern>/search</url-pattern>
+    <url-pattern>/browse</url-pattern>
+    <url-pattern>/movies</url-pattern>
+    <url-pattern>/movie</url-pattern>
+    <url-pattern>/star</url-pattern>
+    <url-pattern>/checkout</url-pattern>
+    <url-pattern>/cart</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>EmployeeAuthenticationFilter</filter-name>
+    <url-pattern>/_dashboard/movie</url-pattern>
+    <url-pattern>/_dashboard/star</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ViewFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+
+  <!-- Force HTTPS requests only -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HTTPSOnly</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+</web-app>

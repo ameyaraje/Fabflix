@@ -1,0 +1,64 @@
+div#index-content.content-container {
+	text-align: center;
+	padding: 0px 150px;
+}
+
+p#sort-nav {
+	font-size: 1.2vw;
+}
+
+div.movie-left {
+	float: left;
+	width: 50%;
+	display: inline-block;
+}
+
+div.movie-right {
+	float: right;
+	width: 50%;
+	display: inline-block;
+}
+
+table {
+	margin-bottom: 30px;
+}
+
+td.movie-info {
+	text-align: left;
+}
+
+input#cart {
+        color: #FFFFFF;
+}
+
+p#num-nav {
+	text-align: right;
+	font-size: 1vw;
+}
+
+table#genre-top-nav {
+	width: 25%;
+	margin-left: 25%;
+	margin-bottom: 0px !important;
+}
+
+.movie-banner {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  margin-bottom: 10px;
+}
+.movie-banner > img {
+  margin: auto;
+  max-width: 100px;
+  max-height: 150px;
+}
+
+.btn-primary {
+  background-color: #8F0502;
+  border-color: #460908;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:focus:active {
+  background-color: #750200;
+  border-color: #460908;
+}

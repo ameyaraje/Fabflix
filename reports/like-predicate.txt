@@ -1,0 +1,46 @@
+like-predicate - an explanation of how/where you use the LIKE predicate in your codebase
+ -------------------------------------------------------------------------------
+INFO
+
+We used the LIKE predicate in queries where an exact string match was not appropriate or 
+necessary. The LIKE predicate makes wildcards % and _ available.
+
+Using the LIKE predicate, the user does not have to provide an exact value for an attribute, 
+and the system will support "partial matching". 
+
+ -------------------------------------------------------------------------------
+ADVANCED SEARCH OPTIONS
+
+We used it for the “Advanced Search Options” page. The “Advanced Search Options” page lets the 
+user search for movies with any of the following attributes or their combination: title, year, 
+director, first and/or last name. After getting the user input, we use the LIKE predicate on the 
+inputted strings - title, director, first name, and last name. We chose to use ‘%INPUT%’ 
+which covers ‘%INPUT’ and ‘INPUT%’ with INPUT as value inputted by the user for a particular 
+attribute. ‘%INPUT%’ will return all strings that contain the pattern ‘INPUT’ anywhere.
+
+An example query we do is:
+
+SELECT m.id FROM movies m 
+INNER JOIN stars_in_movies sm ON sm.movie_id = m.id 
+INNER JOIN stars s ON s.id = sm.star_id 
+WHERE LOWER(m.title) LIKE LOWER('%dal%') 
+AND m.year = 2014 
+AND LOWER(m.director) LIKE LOWER('%shy%') 
+AND LOWER(s.first_name) LIKE LOWER('%tom%') 
+AND LOWER(s.last_name) LIKE LOWER('%jerry%')
+
+ -------------------------------------------------------------------------------
+BROWSING BY TITLE
+
+We also used the LIKE predicate in the browsing pages when the user browses by title. 
+The browsing pages by title lets the user browse for movies by choosing a number or letter 
+from a predefined list. We then return all movies that start with that particular number or letter. 
+The query uses ‘INPUT%’  with INPUT as value inputted by the user for a particular attribute. ‘INPUT%’ 
+returns all strings that start with ‘INPUT%’.
+
+An example query we do is:
+
+SELECT m.id FROM movies m 
+INNER JOIN genres_in_movies gm ON gm.movie_id = m.id 
+INNER JOIN genres g ON g.id = gm.genre_id 
+WHERE m.title LIKE 'e%'

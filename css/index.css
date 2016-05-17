@@ -1,0 +1,51 @@
+div.content-container {
+    margin-top: -20px;
+}
+
+h3#intro {
+    position: absolute;
+    margin-left: 35px;
+    z-index: 1;
+    color: #FFFFFF;
+    /*font-size: 44px;*/
+    font-size: 2vw;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+div#icons span {
+    display: inline-block;
+}
+
+p.icon-title, p.icon-description {
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+p.icon-title {
+
+}
+
+p.icon-description {
+    color: #808080;
+}
+
+h3#selection {
+    position: absolute;
+    margin-left: 35px;
+    z-index: 1;
+    /*font-size: 44px; */
+    margin-top: 10%;
+    font-size: 3vw;
+    padding: 0px 50px;
+    font-weight: bold;
+}
+
+div#icons span {
+    width: 33%;
+}
+
+span.left, span.middle, span.right {
+    dispay: inline-block;
+}
+
